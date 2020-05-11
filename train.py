@@ -6,6 +6,9 @@ from torch.utils.data import DataLoader
 import time
 import math
 
+#ignore torch.uint8 warning
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
 
 ## Network Arguments
 args = {}
@@ -43,8 +46,8 @@ crossEnt = torch.nn.BCELoss()
 ## Initialize data loaders
 trSet = ngsimDataset('data/TrainSet.mat')
 valSet = ngsimDataset('data/ValSet.mat')
-trDataloader = DataLoader(trSet,batch_size=batch_size,shuffle=True,num_workers=8,collate_fn=trSet.collate_fn)
-valDataloader = DataLoader(valSet,batch_size=batch_size,shuffle=True,num_workers=8,collate_fn=valSet.collate_fn)
+trDataloader = DataLoader(trSet,batch_size=batch_size,shuffle=True,num_workers=0,collate_fn=trSet.collate_fn)
+valDataloader = DataLoader(valSet,batch_size=batch_size,shuffle=True,num_workers=0,collate_fn=valSet.collate_fn)
 
 
 ## Variables holding train and validation loss values:
